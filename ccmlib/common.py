@@ -923,19 +923,9 @@ def _update_java_version(current_java_version, current_java_home_version,
         .format(info_message, current_java_version, current_java_home_version, jvm_version, for_build,
                 cassandra_version, install_dir, env))
 
-    if cassandra_version >= '5.2':
-        build_versions = get_supported_jdk_versions(install_dir)
-        run_versions = get_supported_jdk_versions(install_dir)
 
-    if '4.0' <= cassandra_version < '5.2':
-        if not os_env:
-            os_env = os.environ
-        if 'CASSANDRA_USE_JDK11' not in os_env:
-            build_versions = [8, 11]
-            run_versions = [8, 11, 12, 13, 14, 15, 16, 17]
-        else:
-            build_versions = [11]
-            run_versions = [11]
+    build_versions = [11]
+    run_versions = [11]
 
     versions = build_versions if for_build else run_versions
 
